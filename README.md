@@ -7,7 +7,7 @@
 <dependency>    
       <groupId>com.yiwise</groupId>  
       <artifactId>yiwise-asrv2-client</artifactId>   
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0</version>
 </dependency>
 ```
 
