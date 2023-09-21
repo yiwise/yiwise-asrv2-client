@@ -16,7 +16,7 @@
 ```java
 public static void asr(String filePath) throws IOException {
         // 创建客户端实例
-        String asrGatewayUrl = "ws://121.196.149.36:7070";
+        String asrGatewayUrl = "ws://127.0.0.1:7070";
         YiwiseAsrClient client = new YiwiseAsrClient(asrGatewayUrl);
 
 
