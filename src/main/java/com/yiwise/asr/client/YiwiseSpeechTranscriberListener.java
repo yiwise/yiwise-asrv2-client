@@ -13,7 +13,6 @@ import java.nio.ByteBuffer;
 
 /**
  * @author lgy
- * @date 2023/1/29
  */
 public class YiwiseSpeechTranscriberListener implements ConnectionListener {
     private static final Logger logger = LoggerFactory.getLogger(YiwiseSpeechTranscriberListener.class);
@@ -30,6 +29,10 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
     public YiwiseSpeechTranscriberListener() {
     }
 
+    /**
+     * Called when the connection is closed.
+     * @param message the text message.
+     */
     @Override
     public void onMessage(String message) {
         if (message == null || message.trim().length() == 0) {
@@ -57,6 +60,11 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
         }
     }
 
+    /**
+     * Invoked after the connection was closed.
+     * @param closeCode the RFC 6455 status code
+     * @param reason    a string description for the reason of the close
+     */
     @Override
     public void onClose(int closeCode, String reason) {
         if (yiwiseSpeechTranscriber != null) {
@@ -69,6 +77,10 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
 
     }
 
+    /**
+     * 识别过程中返回的中间结果
+     * @param response 识别结果
+     */
     public void onTranscriptionResultChange(YiwiseSpeechTranscriberResponse response) {
         try {
             if (StringUtils.isEmpty(response.getTransSentenceText())) {
@@ -80,6 +92,10 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
         }
     }
 
+    /**
+     * 识别过程中返回的最终结果
+     * @param response 识别结果
+     */
     public void onSentenceEnd(YiwiseSpeechTranscriberResponse response) {
         try {
             // 判断是否有文本和语义
@@ -93,6 +109,11 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
         }
     }
 
+    /**
+     * Invoded after fail
+     * @param status 失败状态码
+     * @param reason 失败原因
+     */
     @Override
     public void onFail(int status, String reason) {
         try {
@@ -103,6 +124,10 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
         }
     }
 
+    /**
+     *
+     * @param message the binary message.
+     */
     @Override
     public void onMessage(ByteBuffer message) {
     }
@@ -113,11 +138,20 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
     }
 
 
+    /**
+     * Invoked after an error.
+     * @param throwable the cause
+     */
     @Override
     public void onError(Throwable throwable) {
         logger.error(throwable.getMessage(), throwable);
     }
 
+    /**
+     *
+     * @param response 识别结果
+     * @return 是否开始识别
+     */
     protected boolean isTranscriptionStarted(YiwiseSpeechTranscriberResponse response) {
         String name = response.getName();
         if (name.equals(Constant.VALUE_NAME_ASR_TRANSCRIPTION_STARTED)) {
@@ -126,6 +160,11 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
         return false;
     }
 
+    /**
+     *
+     * @param response 识别结果
+     * @return 是否开始识别
+     */
     protected boolean isSentenceBegin(YiwiseSpeechTranscriberResponse response) {
         String name = response.getName();
         if (name.equals(Constant.VALUE_NAME_ASR_SENTENCE_BEGIN)) {
@@ -173,7 +212,7 @@ public class YiwiseSpeechTranscriberListener implements ConnectionListener {
     /**
      * 识别结束后返回的最终结果
      *
-     * @param response
+     * @param response 识别结果
      */
     public void onTranscriptionComplete(YiwiseSpeechTranscriberResponse response) {
 

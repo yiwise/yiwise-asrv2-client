@@ -9,7 +9,7 @@ public class YiwiseSpeechTranscriberResponse extends SpeechResProtocol {
     /**
      * 句子的index
      *
-     * @return
+     * @return 句子的index
      */
     public Integer getTransSentenceIndex() {
         return (Integer)payload.get("index");
@@ -18,7 +18,7 @@ public class YiwiseSpeechTranscriberResponse extends SpeechResProtocol {
     /**
      * 当前已处理的音频时长，单位是毫秒
      *
-     * @return
+     * @return 当前已处理的音频时长，单位是毫秒
      */
     public Integer getTransSentenceTime() {
         return (Integer)payload.get("time");
@@ -27,7 +27,7 @@ public class YiwiseSpeechTranscriberResponse extends SpeechResProtocol {
     /**
      * 结果置信度,0.0-1.0 值越大置信度越高
      *
-     * @return
+     * @return 置信度
      */
     public Double getConfidence() {
         Object o=payload.get("confidence");
@@ -40,7 +40,7 @@ public class YiwiseSpeechTranscriberResponse extends SpeechResProtocol {
     /**
      *  sentenceBegin事件对应的时间
      *
-     * @return
+     * @return 开始时间
      */
     public Integer getSentenceBeginTime() {
         return (Integer)payload.get("begin_time");
@@ -50,7 +50,7 @@ public class YiwiseSpeechTranscriberResponse extends SpeechResProtocol {
     /**
      * 最终识别结果
      *
-     * @return
+     * @return 最终识别结果
      */
     public String getTransSentenceText() {
         return (String)payload.get("result");

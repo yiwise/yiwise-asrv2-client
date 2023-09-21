@@ -26,8 +26,8 @@ public interface ConnectionListener {
     /**
      * Invoded after fail
      *
-     * @param status
-     * @param reason
+     * @param status 失败状态码
+     * @param reason 失败原因
      */
     void onFail(int status, String reason);
 

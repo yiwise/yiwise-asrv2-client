@@ -32,6 +32,9 @@ public class YiwiseNettyWebSocketClient {
     EventLoopGroup group = new NioEventLoopGroup(0);
     Bootstrap bootstrap = new Bootstrap();
 
+    /**
+     * @param url gateway url
+     */
     public YiwiseNettyWebSocketClient(String url) {
         try {
             this.websocketURI = new URI(url);
@@ -64,6 +67,10 @@ public class YiwiseNettyWebSocketClient {
      * - 在URL中带上ASR参数及SecretId
      * - 用HMAC-SHA1算法和SecretKey对生成的URL进行签名，并进行Base64编码
      * - 服务端存有SecretId和SecretKey的键值对，收到后利用对称算法解密
+     * @param listener listener
+     * @param connectionTimeout connectionTimeout
+     * @return Connection
+     * @throws Exception Exception
      */
     public Connection connect(ConnectionListener listener, int connectionTimeout) throws Exception {
         bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectionTimeout);

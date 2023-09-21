@@ -204,7 +204,7 @@ public class SpeechReqProtocol {
 
     /**
      * 获取appkey
-     * @return
+     * @return appkey
      */
     public String getAppKey() {
         return header.get(Constant.PROP_APP_KEY);
@@ -212,7 +212,7 @@ public class SpeechReqProtocol {
 
     /**
      * 设置appkey
-     * @param appKey
+     * @param appKey appkey
      */
     public void setAppKey(String appKey) {
         header.put(Constant.PROP_APP_KEY, appKey);
@@ -220,7 +220,7 @@ public class SpeechReqProtocol {
 
     /**
      * 获取task_id
-     * @return
+     * @return taskId
      */
     public String getTaskId() {
         return header.get(Constant.PROP_TASK_ID);
@@ -232,8 +232,8 @@ public class SpeechReqProtocol {
 
     /**
      * 设置上下文信息,如设备信息,位置信息等,用于需要使用或记录相关信息的场景
-     * @param key
-     * @param obj
+     * @param key key
+     * @param obj obj
      */
     public void putContext(String key, Object obj) {
         context.put(key, obj);
@@ -241,8 +241,8 @@ public class SpeechReqProtocol {
 
     /**
      * 设置自定义请求参数,用于设置语音服务的高级属性,或新功能
-     * @param key
-     * @param value
+     * @param key key
+     * @param value  value
      */
     public void addCustomedParam(String key, Object value) {
         payload.put(key, value);

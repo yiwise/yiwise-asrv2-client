@@ -62,7 +62,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 输入音频采样率 8000 16000
      *
-     * @param sampleRate
+     * @param sampleRate 采样率
      */
     public void setSampleRate(SampleRateEnum sampleRate) {
         payload.put(Constant.PROP_ASR_SAMPLE_RATE, sampleRate.value);
@@ -71,7 +71,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 是否返回句子的中间识别结果，默认为false
      *
-     * @param isEnable
+     * @param isEnable 是否开启
      */
     public void setEnableIntermediateResult(boolean isEnable) {
         payload.put(Constant.PROP_ASR_ENABLE_INTERMEDIATE_RESULT, isEnable);
@@ -80,7 +80,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 是否在识别结果中添加标点，默认为false
      *
-     * @param isEnable
+     * @param isEnable 是否开启
      */
     public void setEnablePunctuation(boolean isEnable) {
         payload.put(Constant.PROP_ASR_ENABLE_PUNCTUATION_PREDICTION, isEnable);
@@ -89,7 +89,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 设置开启ITN(Inverse Text Normalization）,开启后汉字数字将转为阿拉伯数字输出,默认关闭
      *
-     * @param enableITN
+     * @param enableITN 是否开启
      */
     public void setEnableITN(boolean enableITN) {
         payload.put(Constant.PROP_ASR_ENABLE_ITN, enableITN);
@@ -105,7 +105,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 自己控制发送，需要控制发送速率
      *
-     * @param data
+     * @param data 语音数据
      */
     public void send(byte[] data) {
         state.checkSend();
@@ -117,6 +117,10 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
         }
     }
 
+    /**
+     * 自己控制发送，需要控制发送速率
+     * @param data 要发送的数据
+     */
     public void fastSend(byte[] data) {
         state.checkSend();
         try {
@@ -130,7 +134,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 实时采集音频流
      *
-     * @param ins
+     * @param ins 音频流
      */
     public void send(InputStream ins) {
         state.checkSend();
@@ -149,11 +153,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
 
     /**
      * 语音数据来自文件，发送时需要控制速率，使单位时间内发送的数据大小接近单位时间原始语音数据存储的大小
-     * <ul>
-     * <li><对于8k pcm 编码数据，建议每发送3200字节 sleep 200 ms/li>
-     * <li>对于16k pcm 编码数据，建议每发送6400字节 sleep 200 ms/li>
-     * <li>对于其它编码格式的数据，用户根据压缩比，自行估算，比如压缩比为10:1的 16k opus ，需要每发送6400/10=640 sleep 200ms/li>
-     * </ul>
+     * 对于8k pcm 编码数据，建议每发送3200字节 sleep 200 ms
      *
      * @param ins           离线音频文件流
      * @param batchSize     每次发送到服务端的数据大小
@@ -223,7 +223,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 开始语音转写：发送语音转写请求，同步接收服务端确认
      *
-     * @throws Exception
+     * @throws Exception 异常
      */
     public void start() throws Exception {
         state.checkStart();
@@ -249,7 +249,7 @@ public class YiwiseSpeechTranscriber extends SpeechReqProtocol {
     /**
      * 结束语音识别: 发送结束识别通知，接收服务端确认
      *
-     * @throws Exception
+     * @throws Exception 异常
      */
     public void stop() throws Exception {
         state.checkStop();
